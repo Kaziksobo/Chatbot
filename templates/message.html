@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="Description" content="Displays messages sent and received by the chatbot">
+        <meta name="Author" content="Kazik Sobotnicki">
+        <link rel="icon" type="image/x-icon" href="../static/chatbot-icon.png">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <!-- Imports different CSS stylesheet depending on Jinja variable -->
+        <link rel="stylesheet" href={{stylesheet}}>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <title>Messages</title>
+    </head>
+    <body>
+        <div id="grid-container">
+            <div id="sidebar">
+                <form action="/home" id="chatbot-form" method="post">
+                    <button type="submit" id="chatbot-select">
+                        <img src="../static/chatbot-icon.png" id="chatbot-icon">
+                        <p id="chatbot-name">
+                            Chatbot
+                        </p>
+                    </button>
+                </form>
+            </div>
+            <div id="header">
+                <form action="/search" method="post" autocomplete="off" id="search-form">
+                    <input type="text" id="search-bar" name="search-bar" placeholder="Search messages here..." list="messages-list">
+                    <!-- Adds datalist, with elements from Jinja variable -->
+                    <datalist id="messages-list">
+                        {% for message in messages_list %}
+                            <option value="{{ message }}">
+                        {% endfor %}
+                    </datalist>
+                </form>
+            </div>
+            <div id="main">
+                <div id="messages-container">
+                    <!-- Creates message bubble for each message in Jinja messages variable -->
+                    <!-- A different bubble is used depending on if the message is from the user or the AI -->
+                    {% for message in messages %}
+                        {% if message.type == 'ai' %}
+                            <div class="ai-message-container" id="{{ message.id }}">
+                                <div class="ai-message-icon">
+                                </div>
+                                <div class="ai-message-box message-box">
+                                    <p class="ai-message-text message-text">
+                                        {{ message.text }}
+                                    </p>
+                                    <!-- Button for Bootstrap modal -->
+                                    <button type="button" class="btn btn-info btn-lg report-button" data-toggle="modal" data-target="#report-modal">
+                                    </button>
+                                    <!-- Bootstrap modal -->
+                                    <div class="modal fade" role="dialog" id="report-modal" tabindex="-1" aria-labelledby="report-modal-label" aria-hidden="true">
+                                        <div class="vertical-alignment-helper">
+                                            <div class="modal-dialog vertical-align-center">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">
+                                                            Report message
+                                                        </h4>
+                                                        <button type="button" class="btn btn-default modal-close-button" data-dismiss="modal"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="/report" method="post" autocomplete="off" class="report-form">
+                                                            <!-- Sets the name of the report form to the message's id, allowing the message being reported to easily be identified -->
+                                                            <input type="text" class="report-reason-input" name="report-{{ message.id }}" placeholder="Enter report reason here...">
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="user-message-box message-box" id="{{ message.id }}">
+                                <p class="user-message-text message-text">
+                                    {{ message.text }}
+                                </p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <form action="/message" method="post" autocomplete="off" id="message-form">
+                    <input type="text" id="message-input" name="message-input" placeholder="Enter message here...">
+                    <button type="submit" id="message-submit-button">
+                    </button>
+                </form>
+            </div>
+            <div id="settings">
+                <form action="/theme" id="colour-mode-form" method="post">
+                    <button type="submit" id="colour-mode-button">
+                    </button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

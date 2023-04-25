@@ -1,0 +1,452 @@
+body{
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(#FFF, #FFF384);
+    color: #000;
+}
+#grid-container {
+    display: grid;
+    grid-template-columns: 15vw 70vw 15vw;
+    grid-template-rows: 9vh 81vh 10vh;
+    gap: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+}
+#grid-container > div {
+    text-align: center;
+}
+input[type="text"] {
+    background-color: #44FF4C;
+    border-radius: 22.5px;
+    border-color: #000;
+    border-width: 3.5px;
+    padding-left: 12px;
+}
+::placeholder {
+    color: #000;
+}
+ul {
+    /* Centring text and bullet points */
+    text-align: center;
+    list-style-position: inside;
+  }
+
+  
+
+/* Content for main div */
+/* Divs labelled '-result' are in search_result.html, search_error.html, report.html */
+
+/* Main div for index.html and message.html */
+#main {
+    grid-column: 2 / 4;
+    grid-row: 2 / 4;
+    border-right: 0;
+    border-bottom: 0;
+    border-top: .25vw solid #000000;
+    border-left: .25vw solid #000000;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 81.5vh 8.5vh;
+    gap: 1vh;
+}
+#main-result {
+    grid-column: 2 / 4;
+    grid-row: 2 / 4;
+    border-right: 0;
+    border-bottom: 0;
+    border-top: .25vw solid #000;
+    border-left: .25vw solid #000;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 5vh 85vh;
+    gap: 1vh;
+}
+
+/* Warnings - index page */
+#warnings {
+    grid-row: 1;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 47.5% 47.5%;
+    gap: 5%;
+}
+#warning-icon {
+    background-image: url(light-images/info.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    grid-row: 1;
+}
+#warning-message {
+    grid-row: 2;
+    font-size: 2.5vh;
+}
+
+
+#messages-container {
+    grid-row: 1;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(6, 11%);
+}
+#messages-container-result {
+    grid-row: 2;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(6, 11%);
+    margin-bottom: 2.5vh;
+}
+/* Contains error and report confirmation messages and icons */
+#error-container, #report-container {
+    grid-row: 2;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 47.5% 47.5%;
+    gap: 5%;
+}
+#error-icon {
+    background-image: url(light-images/error.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    grid-row: 1;
+}
+#report-icon {
+    background-image: url(light-images/post-report.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    grid-row: 1;
+}
+#error-message, #report-message {
+    grid-row: 2;
+    font-size: 2.5vh;
+}
+/* Back button on report.html, search_error.html and search_result.html */
+#back {
+    grid-row: 1;
+    border: none;
+    text-align: center;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+#back-button {
+    border: none;
+    background-image: url(light-images/back-icon.png);
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    padding: 4px;
+    padding-left: 50px;
+    height: 3vh;
+    width: 13vw;
+    font-size: 2.3vh;
+    box-sizing: content-box;
+    margin-top: 1vh;
+    white-space: nowrap;
+}
+
+/* Class for every message bubble */
+.message-box {
+    border: 3px solid #000000;
+    border-radius: 22.5px;
+    text-align: center;
+    position: relative;
+}
+/* Container for ai message bubble and avatar icon */
+.ai-message-container {
+    width: 60%;
+    height: 60%;
+    max-height: 60%;
+    margin: auto auto 0 0;
+    display: grid;
+    grid-template-columns: 7% 93%;
+}
+/* Class for AI message bubble */
+.ai-message-box {
+    height: 100%;
+    grid-column: 2;
+    background-color: #FEE504;
+    border-bottom-left-radius: 0px !important;
+    display: grid;
+    grid-template-columns: 93% 7%;
+    grid-template-rows: 100%;
+}
+/* Class for AI avatar icon beside message bubble */
+.ai-message-icon {
+    grid-column: 1; 
+    background-image: url(chatbot-icon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    padding: 0;
+    margin: 0;
+}
+/* Class for user message bubble */
+.user-message-box {
+    width: 60%;
+    height: 60%;
+    background-color: #04FEFE;
+    margin: auto 0 0 auto;
+    border-bottom-right-radius: 0px !important;
+}
+/* Individual styling for searched-for message on search_results.html */
+.query-message-box {
+    background: #dd8648 !important;
+}
+.message-text {
+    margin: 0;
+    margin-left: 2% !important;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 2vh;
+}
+.ai-message-text {
+    grid-column: 1;
+}
+
+/* Report button inside AI message bubble */
+.report-button {
+    grid-column: 2;
+    background-color: transparent;
+    background-image: url(light-images/report-icon.png);
+    border: none !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    padding: 0;
+    margin: 0;
+}
+.report-button:hover, .report-button:focus, .report-button:active {
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+/* For centring modal dialog box */
+.vertical-alignment-helper {
+    display: table;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;}
+    
+.vertical-align-center {
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+/* All modal content */
+.modal-content {
+    /* Inheriting the size of the modal from Bootstrap */
+    width: inherit;
+    max-width: inherit; /* To avoid the modal window stretching full width */
+    height: inherit; /* To center horizontally */
+    margin: 0 auto;
+    pointer-events: all;
+    background-image: linear-gradient(#ffface, #fff7af);
+}
+.modal-header {
+    display: grid;
+    grid-template-columns: 90% 10%;
+    grid-template-rows: 100%;
+    padding-top: 0;
+    margin-top: 0;
+    border: none;
+}
+.modal-title {
+    grid-column: 1;
+    padding-left: 13%;
+}
+.modal-close-button {
+    grid-column: 2;
+    background-image: url(light-images/modal-close.png) !important;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+}
+.modal-close-button:focus, .modal-close-button:active, .modal-close-button:hover {
+    background-image: url(light-images/modal-close.png) !important;
+    background-color: transparent !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.modal-body {
+    margin-top: 5%;
+    text-align: center;
+    margin-bottom: 7%;
+}
+.report-reason-input {
+    border-width: 2.5px !important;
+    padding: 4px;
+    width: 60%
+}
+
+/* Setting order of message bubbles (There must be a better way to do this???) */
+#message-1 {
+    grid-row: 9;
+}
+#message-2 {
+    grid-row: 8;
+}
+#message-3 {
+    grid-row: 7;
+}
+#message-4 {
+    grid-row: 6;
+}
+#message-5 {
+    grid-row: 5;
+}
+#message-6 {
+    grid-row: 4;
+}
+#message-7 {
+    grid-row: 3;
+}
+#message-8 {
+    grid-row: 2;
+}
+#message-9 {
+    grid-row: 1;
+}
+
+/* message input form */
+#message-form {
+    grid-row: 2;
+    border: none;
+    text-align: center;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 77.5vw 2.5vw; 
+    grid-template-rows: 6vh;
+    margin-bottom: auto;
+    gap: 1vw;
+    margin-left: 1vw;
+}
+#message-input {
+    padding: 10px;
+    padding-left: 15px;
+    font-size: 2.5vh;
+}
+#message-submit-button {
+    background-image: url(light-images/message-submit.png) !important;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+}
+
+
+/* content for header div */
+#header {
+    grid-column: 2 / 4;
+    grid-row: 1;
+    border-top: 0vw;
+    border-right: 0vw;
+    border-bottom: .25vw solid #000000;
+    border-left: .25vw solid #000000;
+    display: flex;
+    justify-content: right;
+    align-items: center;  
+}
+#search-bar {
+    background-image: url(light-images/search.png);
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 4px;
+    padding-left: 60px;
+    height: 3vh;
+    width: 40vw;
+    margin-right: 4vw;
+    box-sizing: content-box;
+    font-size: 2.3vh;
+}
+
+
+/* content for sidebar div */
+#sidebar {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    border-left: 0;
+    border-top: 0;
+    border-right: .25vw solid #000000;
+    border-bottom: .25vw solid #000000;
+    padding: 0;
+}
+#chatbot-select {
+    border-bottom: #000 .25vw solid;
+    border-right: #000 .25vw solid;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 35% 65%;
+    grid-template-rows: 10vh;
+    grid-auto-flow: column;
+    text-align: center;
+    background-color: #FFF384;
+}
+#chatbot-icon {
+    height: auto;
+    width: 80%;
+    margin: auto;
+    display: block;
+}
+#chatbot-name {
+    text-align: left;
+    margin-bottom: auto;
+    margin-top: auto;
+    font-size: 2.8vh;
+    color: #000
+}
+
+
+/* content for settings div */
+#settings {
+    grid-column: 1;
+    grid-row: 3;
+    border-bottom: 0;
+    border-left: 0;
+    border-top: .25vw solid #000000;
+    border-right: .25vw solid #000000;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 100%;
+}
+#colour-mode-form {
+    grid-column: 1;
+}
+#colour-mode-button {
+    width: 100%;
+    height: 100%;
+    background-image: url(light-images/dark-mode.png) !important;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+}
