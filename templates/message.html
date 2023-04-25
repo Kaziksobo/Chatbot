@@ -11,6 +11,14 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <title>Messages</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script type="text/javascript">// <![CDATA[
+            function loading(){
+                $("#loading-container").show();
+                $("#messages-container").hide();       
+            }
+        // ]]></script>
     </head>
     <body>
         <div id="grid-container">
@@ -36,6 +44,9 @@
                 </form>
             </div>
             <div id="main">
+                <div id="loading-container">
+                    <div class="spinner"></div>
+                </div>
                 <div id="messages-container">
                     <!-- Creates message bubble for each message in Jinja messages variable -->
                     <!-- A different bubble is used depending on if the message is from the user or the AI -->
@@ -85,7 +96,7 @@
                 </div>
                 <form action="/message" method="post" autocomplete="off" id="message-form">
                     <input type="text" id="message-input" name="message-input" placeholder="Enter message here...">
-                    <button type="submit" id="message-submit-button">
+                    <button type="submit" id="message-submit-button" onclick="loading();">
                     </button>
                 </form>
             </div>
