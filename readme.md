@@ -1,5 +1,7 @@
 # Basic chatbot using BlenderBot 2.0 and Flask
 
+Note: this is separate to my NEA
+
 ## Requirements
 
 * Windows (this program is currently untested on other operating systems)
