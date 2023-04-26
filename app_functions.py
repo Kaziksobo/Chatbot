@@ -144,12 +144,12 @@ def model_generation(name: str, input_ids: torch.Tensor) -> torch.Tensor:
 
 def beams_calc() -> int:
     """Calculate num_beams to use in model generation based on CPU frequency.
-    Currently flips between 35 beams in above 3.4GHz, otherwise uses 1 beam"""
+    Uses an algorithm that is 0 at or below 2.4Ghz, and 35 at 3.6Ghz"""
     
     cpu_freq = psutil.cpu_freq()
-    cpu_freq = cpu_freq.max
+    cpu_freq = (cpu_freq.max)/1000
 
-    return 35 if cpu_freq > 3400 else 1
+    num_beams =  min(0, round((29.167*cpu_freq) - 70.001))
 
 def format_message(message: str) -> str:
     """Formats message to capitalise and remove whitespace and fix some grammar errors"""
