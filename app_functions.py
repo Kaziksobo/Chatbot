@@ -130,6 +130,7 @@ def model_generation(name: str, input_ids: torch.Tensor) -> torch.Tensor:
     
     num_beams = beams_calc()
     
+    print(f'num_beams used: {num_beams}')
     print('Generating reply ids')
     # Generates Reply ids using beam search to generate text
     result = model.generate(
@@ -137,19 +138,18 @@ def model_generation(name: str, input_ids: torch.Tensor) -> torch.Tensor:
         num_beams=num_beams, 
         max_length=60
     )
-    print(f'num_beams used: {num_beams}')
     print(f'Reply Ids: {result}')
     
     return result
 
 def beams_calc() -> int:
     """Calculate num_beams to use in model generation based on CPU frequency.
-    Uses an algorithm that is 0 at or below 2.4Ghz, and 35 at 3.6Ghz"""
+    Uses a linear algorithm that is 1 at 2.4GHz and 35 at 3.3GHz
+    (if the frequency is lower than 2.4GHz, 1 will be used)"""
     
     cpu_freq = psutil.cpu_freq()
     cpu_freq = (cpu_freq.max)/1000
-
-    num_beams =  min(0, round((29.167*cpu_freq) - 70.001))
+    return 1 if cpu_freq <= 2.4 else round(37.8*cpu_freq - 89.7)
 
 def format_message(message: str) -> str:
     """Formats message to capitalise and remove whitespace and fix some grammar errors"""
